@@ -14,7 +14,7 @@ flutter pub get
 flutter run
 ```
 
-#Whats inside the Apps:
+# Whats inside the Apps:
 
 1. The app will start and search for nearby BLE devices. When it finds your target BLE device, select it to establish a connection.
 2. Connect to the device
