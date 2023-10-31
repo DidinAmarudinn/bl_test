@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:ble_test/screen/detail_device_screen.dart';
 import 'package:ble_test/widget/scan_result_item.dart';
@@ -58,7 +59,11 @@ class _ScanDeviceScreenState extends State<ScanDeviceScreen> {
     }
   }
 
-  void onConnectPressed(BluetoothDevice device) {
+  void onConnectPressed(BluetoothDevice device) async {
+    if (Platform.isAndroid) {
+    // this line will triger the broadcast reciver to force the pin hardcoded from native code
+     await device.createBond();
+    }
     device.connect().catchError((e) {
       debugPrint(e.toString());
     });
