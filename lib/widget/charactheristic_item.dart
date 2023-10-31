@@ -40,7 +40,6 @@ class _CharacteristicItemState extends State<CharacteristicItem> {
 
   BluetoothCharacteristic get c => widget.characteristic;
 
-
   Future onReadPressed() async {
     try {
       await c.read();
@@ -51,8 +50,7 @@ class _CharacteristicItemState extends State<CharacteristicItem> {
 
   Future onWritePressed(List<int> data) async {
     try {
-      await c.write(data,
-          withoutResponse: c.properties.writeWithoutResponse);
+      await c.write(data, withoutResponse: c.properties.writeWithoutResponse);
 
       if (c.properties.read) {
         await c.read();
@@ -141,6 +139,8 @@ class _CharacteristicItemState extends State<CharacteristicItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text('Characteristic'),
+            buildUuid(context),
+            buildValue(context),
             SizedBox(
               height: 50,
               child: TextField(
@@ -165,8 +165,6 @@ class _CharacteristicItemState extends State<CharacteristicItem> {
                 "Send",
               ),
             ),
-            buildUuid(context),
-            buildValue(context),
           ],
         ),
         subtitle: buildButtonRow(context),
