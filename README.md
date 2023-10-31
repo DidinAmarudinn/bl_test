@@ -1,16 +1,24 @@
 # ble_test
 
-A new Flutter project.
+Flutter project to demonstarate abou how ble work
 
-## Getting Started
+# How to run this project
+1. Clone this repo
+2. Install the project dependencies:
+ ```shell
+flutter pub get
+```
 
-This project is a starting point for a Flutter application.
+3. Run this project
+ ```shell
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Whats inside the Apps:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. The app will start and search for nearby BLE devices. When it finds your target BLE device, select it to establish a connection.
+2. Connect to the device
+3. Tap open and go to detail device
+4. Select the service has charasteristic to write
+5. Input the message on textfield
+6. send the message by tap send button
