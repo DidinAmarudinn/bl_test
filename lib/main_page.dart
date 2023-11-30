@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ble_test/screen/bluetooth_off_screen.dart';
 import 'package:ble_test/screen/scan_device_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class MainPage extends StatefulWidget {
@@ -13,6 +14,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  var chanel = const MethodChannel("ble");
+
+  registerBroadcastReciver() {
+    chanel.invokeMethod("registerBroadcastReciver");
+  }
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
 
   late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
@@ -20,6 +26,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    registerBroadcastReciver();
     _adapterStateStateSubscription = FlutterBluePlus.adapterState.listen((state) {
       _adapterState = state;
       setState(() {});

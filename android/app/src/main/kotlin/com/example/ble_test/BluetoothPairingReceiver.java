@@ -24,6 +24,7 @@ public class BluetoothPairingReceiver extends BroadcastReceiver {
                 return;
             }
             bluetoothDevice.setPin(BLE_PIN.getBytes());
+            abortBroadcast()
             Log.e(TAG, "Auto-entering pin: " + BLE_PIN);
             bluetoothDevice.createBond();
             Log.e(TAG, "Pin entered, and request sent...");

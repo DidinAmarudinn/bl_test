@@ -23,7 +23,6 @@ class _ScanDeviceScreenState extends State<ScanDeviceScreen> {
   void initState() {
     super.initState();
 
-
     _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
       _scanResults = results;
       setState(() {});
@@ -60,13 +59,14 @@ class _ScanDeviceScreenState extends State<ScanDeviceScreen> {
   }
 
   void onConnectPressed(BluetoothDevice device) async {
-    if (Platform.isAndroid) {
-    // this line will triger the broadcast reciver to force the pin hardcoded from native code
-     await device.createBond();
-    }
-    device.connect().catchError((e) {
+    await device.connect().catchError((e) async {
       debugPrint(e.toString());
+      
     });
+    if (Platform.isAndroid) {
+      // this line will triger the broadcast reciver to force the pin hardcoded from native code
+        await device.createBond();
+      }
   }
 
   Future onRefresh() {
@@ -90,20 +90,17 @@ class _ScanDeviceScreenState extends State<ScanDeviceScreen> {
     }
   }
 
-
-
   List<Widget> _buildScanResultTiles(BuildContext context) {
     return _scanResults
         .map(
           (r) => ScanResultTile(
-            result: r,
-            onTap: () => onConnectPressed(r.device),
-            onOpen: () {
-               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => DetailDeviceScreen(device: r.device),
-              ));
-            }
-          ),
+              result: r,
+              onTap: () => onConnectPressed(r.device),
+              onOpen: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailDeviceScreen(device: r.device),
+                ));
+              }),
         )
         .toList();
   }
